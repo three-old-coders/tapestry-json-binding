@@ -15,8 +15,8 @@
 package org.apache.tapestry5.bindings.internal;
 
 import org.apache.tapestry5.Binding;
+import org.apache.tapestry5.commons.Location;
 import org.apache.tapestry5.internal.bindings.AbstractBinding;
-import org.apache.tapestry5.ioc.Location;
 import org.apache.tapestry5.json.JSONArray;
 import org.apache.tapestry5.json.JSONObject;
 

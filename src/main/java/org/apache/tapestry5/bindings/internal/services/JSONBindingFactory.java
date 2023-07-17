@@ -19,8 +19,8 @@ import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.bindings.internal.ExpressionToken;
 import org.apache.tapestry5.bindings.internal.JSONArrayBinding;
 import org.apache.tapestry5.bindings.internal.JSONBinding;
-import org.apache.tapestry5.internal.services.StringInterner;
-import org.apache.tapestry5.ioc.Location;
+import org.apache.tapestry5.commons.Location;
+import org.apache.tapestry5.commons.internal.services.StringInterner;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.services.BindingFactory;
 

@@ -14,14 +14,14 @@
 
 package org.apache.tapestry5.bindings.services;
 
-import java.util.List;
-
 import org.apache.tapestry5.bindings.JSONBindingConstants;
 import org.apache.tapestry5.bindings.internal.services.JSONBindingFactory;
-import org.apache.tapestry5.ioc.MappedConfiguration;
+import org.apache.tapestry5.commons.MappedConfiguration;
 import org.apache.tapestry5.ioc.annotations.Autobuild;
 import org.apache.tapestry5.ioc.services.ChainBuilder;
 import org.apache.tapestry5.services.BindingFactory;
+
+import java.util.List;
 
 public class JSONBindingModule {
 
@@ -32,6 +32,7 @@ public class JSONBindingModule {
         this.chainBuilder = chainBuilder;
     }
 
+    @SuppressWarnings("unused")
     public BindingFactory buildJSONBindingFactory(List<BindingFactory> configuration, @Autobuild JSONBindingFactory service) {
 
         configuration.add(service);
@@ -39,6 +40,7 @@ public class JSONBindingModule {
         return chainBuilder.build(BindingFactory.class, configuration);
     }
 
+    @SuppressWarnings("unused")
     public void contributeBindingSource(MappedConfiguration<String, BindingFactory> configuration) {
 
         configuration.addInstance(JSONBindingConstants.JSON, JSONBindingFactory.class);
