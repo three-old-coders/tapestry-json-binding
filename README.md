@@ -7,11 +7,11 @@ Usage
 -----
 
 The module is built with Maven. Integrate this in your pom:
- 
+
     <dependency>
-        <groupId>org.apache.tapestry5</groupId>
+        <groupId>de.threeoldcoders.tapestry5</groupId>
         <artifactId>tapestry-json-binding</artifactId>
-        <version>5.3.7-SNAPSHOT</version>
+        <version>5.7.2</version>
     </dependency>
 
 View the examples:
