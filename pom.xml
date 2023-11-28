@@ -9,12 +9,19 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
-    <groupId>de.threeoldcoders.tapestry5</groupId>
+    <groupId>io.github.three-old-coders.tapestry5</groupId>
     <artifactId>tapestry-json-binding</artifactId>
     <version>5.8.3</version>
 
     <name>Tapestry JSON Binding</name>
     <description>Provides a decent binding prefix implementation for JSON objects and arrays (T5.7.3 - T5.8.x)</description>
+    <url>https://github.com/three-old-coders/tapestry-json-binding</url>
+
+    <scm>
+        <connection>scm:git:git://github.com/three-old-coders/tapestry-json-binding.git</connection>
+        <developerConnection>scm:git:ssh://github.com/three-old-coders/tapestry-json-binding.git</developerConnection>
+        <url>https://github.com/three-old-coders/tapestry-json-binding/tree/master</url>
+    </scm>
 
     <licenses>
         <license>
@@ -36,7 +43,6 @@
             <version>${tapestry-release-version}</version>
             <scope>test</scope>
         </dependency>
-
 
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -109,7 +115,21 @@
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
-                                <phase>verify</phase>
+                                <!-- <phase>verify</phase> -->
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                    <!-- <goal>jar</goal> -->
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.2.0</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
                                 <goals>
                                     <goal>jar</goal>
                                 </goals>
@@ -119,6 +139,75 @@
                 </plugins>
             </build>
         </profile>
+
+        <profile>
+            <id>mvnCentral</id>
+            <!-- for MacOs in terminal: "export GPG_TTY=$(tty)" falls Password über Terminal eingegeben werden soll  -->
+            <!-- mvn clean deploy -P mvnCentral -Dgpg.keyname=<KEYNAME> -Dgpg.passphrase=<PASSPHRASE>
+            configuration is optional e.g. when set in settings.xml -->
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <!-- <phase>verify</phase> -->
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                    <!-- <goal>jar</goal> -->
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.2.0</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <keyname>${gpg.keyname}</keyname>
+                                    <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.8</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
     </profiles>
 
     <developers>
@@ -134,14 +223,4 @@
         </developer>
     </developers>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>BLUEPRINT-ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
 </project>
